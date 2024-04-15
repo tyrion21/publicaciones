@@ -9,7 +9,7 @@ public interface PublicacionService {
     
     List<Publicacion> getAllPublicacion();    
     Optional<Publicacion> getPublicacionById(Long id);
-    Publicacion createPublicacion(Publicacion publicacion);
+    void createPublicacion(Publicacion publicacion);
     Publicacion updatePublicacion(Long id, Publicacion publicacion);
     void deletePublicacion(Long id);
 }

@@ -1,22 +1,26 @@
 package com.jason.publicaciones.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
+import java.util.ArrayList;
+
+import com.jason.publicaciones.model.Comentario;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 
 public class PublicacionDto {
 
-    @NotBlank
+    private Long id;
     private String titulo;
-
-    @NotNull
     private String contenido;
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-    
+    @Builder.Default
+    private List<Comentario> comentarioList = new ArrayList<>();
 }
+
