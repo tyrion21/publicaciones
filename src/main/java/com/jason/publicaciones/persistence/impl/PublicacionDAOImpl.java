@@ -17,7 +17,7 @@ public class PublicacionDAOImpl implements PublicacionDAO{
     private PublicacionRepository publicacionRepository;
 
     @Override
-    public List<Publicacion> getAllComentario() {
+    public List<Publicacion> getAllPublicaciones() {
         return (List<Publicacion>) publicacionRepository.findAll();
     }
 

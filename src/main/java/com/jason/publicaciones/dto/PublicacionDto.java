@@ -3,6 +3,7 @@ package com.jason.publicaciones.dto;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.jason.publicaciones.model.Calificacion;
 import com.jason.publicaciones.model.Comentario;
 
 import lombok.AllArgsConstructor;
@@ -22,5 +23,7 @@ public class PublicacionDto {
     private String contenido;
     @Builder.Default
     private List<Comentario> comentarioList = new ArrayList<>();
+    @Builder.Default
+    private List<Calificacion> calificacionList = new ArrayList<>();
 }
 
