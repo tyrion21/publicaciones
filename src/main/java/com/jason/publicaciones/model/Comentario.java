@@ -1,7 +1,10 @@
 package com.jason.publicaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 
 public class Comentario {
     @Id
@@ -21,6 +25,7 @@ public class Comentario {
 
     @ManyToOne
     @JoinColumn(name = "publicacion_id")
+    @JsonIgnore
     private Publicacion publicacion;
 
     
