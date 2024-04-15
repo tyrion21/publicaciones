@@ -19,16 +19,17 @@ import com.jason.publicaciones.dto.CalificacionDto;
 import com.jason.publicaciones.model.Calificacion;
 import com.jason.publicaciones.services.CalificacionService;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/calificaciones")
 public class CalificacionController {
-    
+
+    private static final Logger logger = LoggerFactory.getLogger(CalificacionController.class);
 
     @Autowired
     private CalificacionService calificacionService;
-
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCalificacionById(@PathVariable Long id) {
@@ -64,8 +65,8 @@ public class CalificacionController {
 
     @PostMapping
     public ResponseEntity<?> createCalificacion(@RequestBody CalificacionDto calificacionDto) {
-        
-        if(calificacionDto.getValor() == 0 || calificacionDto.getPublicacionId() == null){
+
+        if (calificacionDto.getValor() == 0 || calificacionDto.getPublicacionId() == null) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -104,10 +105,11 @@ public class CalificacionController {
 
     @GetMapping("/promedios/{publicacionId}")
     public ResponseEntity<String> getPromedioPublicaciones(@PathVariable Long publicacionId) {
+        logger.info("Obteniendo promedio de calificaciones de la publicación {}", publicacionId);
         Double average = calificacionService.findAverageByPublicacionId(publicacionId);
         String message = "El promedio de calificaciones de la publicación " + publicacionId + " es " + average;
+        logger.info(message);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
 
 }

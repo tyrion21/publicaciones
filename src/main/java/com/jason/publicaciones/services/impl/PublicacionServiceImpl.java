@@ -18,7 +18,7 @@ public class PublicacionServiceImpl implements PublicacionService {
 
     @Override
     public List<Publicacion> getAllPublicacion() {
-        return publicacionDAO.getAllComentario();
+        return publicacionDAO.getAllPublicaciones();
     }
 
     @Override

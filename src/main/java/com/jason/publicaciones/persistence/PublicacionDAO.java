@@ -7,7 +7,7 @@ import com.jason.publicaciones.model.Publicacion;
 
 public interface PublicacionDAO {
     
-    List<Publicacion> getAllComentario();
+    List<Publicacion> getAllPublicaciones();
     Optional<Publicacion> getPublicacionById(Long id);
     Publicacion updatePublicacion(Long id, Publicacion publicacion);
     void save(Publicacion publicacion);
