@@ -11,3 +11,4 @@ services:
       - spring.datasource.username=DSY2201_S4
       - spring.datasource.password=ActForm.S4_BDY
     restart: always
+    
