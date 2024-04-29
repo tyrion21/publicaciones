@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.publicaciones.model.Publicacion;
 import com.jason.publicaciones.persistence.PublicacionDAO;
@@ -17,6 +18,7 @@ public class PublicacionServiceImpl implements PublicacionService {
     private PublicacionDAO publicacionDAO;
 
     @Override
+    @Transactional
     public List<Publicacion> getAllPublicacion() {
         return publicacionDAO.getAllPublicaciones();
     }

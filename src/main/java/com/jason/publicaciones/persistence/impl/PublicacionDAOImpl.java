@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jason.publicaciones.model.Publicacion;
 import com.jason.publicaciones.persistence.PublicacionDAO;
@@ -16,7 +17,8 @@ public class PublicacionDAOImpl implements PublicacionDAO{
     @Autowired
     private PublicacionRepository publicacionRepository;
 
-    @Override
+    @Override   
+    @Transactional
     public List<Publicacion> getAllPublicaciones() {
         return (List<Publicacion>) publicacionRepository.findAll();
     }
