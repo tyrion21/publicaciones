@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
 
 import com.jason.publicaciones.dto.PublicacionDto;
 import com.jason.publicaciones.model.Publicacion;
 import com.jason.publicaciones.services.PublicacionService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
 
 
 @RestController
@@ -60,7 +64,7 @@ public class PublicacionController {
     @GetMapping
     public ResponseEntity<?> getAllPublicacion() {
         logger.info("Obteniendo publicaciones");
-        List<PublicacionDto> publicacionList = publicacionService.getAllPublicacion()
+        List<EntityModel<PublicacionDto>> publicacionList = publicacionService.getAllPublicacion()
             .stream()
             .map(publicacion -> PublicacionDto.builder()
                 .id(publicacion.getId())
@@ -69,8 +73,12 @@ public class PublicacionController {
                 .comentarioList(publicacion.getComentarioList())
                 .calificacionList(publicacion.getCalificacionList())
                 .build())
+            .map(publicacionDto -> EntityModel.of(publicacionDto,
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PublicacionController.class).getPublicacionById(publicacionDto.getId())).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PublicacionController.class).getAllPublicacion()).withRel("publicaciones")))
             .toList();
-        return ResponseEntity.ok(publicacionList);
+        return ResponseEntity.ok(CollectionModel.of(publicacionList,
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PublicacionController.class).getAllPublicacion()).withSelfRel()));
     }
 
     @PostMapping
