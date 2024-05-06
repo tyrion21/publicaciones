@@ -46,4 +46,38 @@ public class PublicacionRepositoryTest {
     
     }
 
+    @Test
+    public void testDeletePublicacion() {
+        Publicacion publicacion = new Publicacion();
+        publicacion.setTitulo("Titulo de prueba");
+        publicacion.setContenido("Contenido de prueba");
+        publicacionRepository.save(publicacion);
+
+        publicacionRepository.deleteById(publicacion.getId());
+
+        assertEquals(0, publicacionRepository.count());
+    }
+
+    @Test
+    public void testUpdatePublicacion() {
+        Publicacion publicacion = new Publicacion();
+        publicacion.setTitulo("Titulo de prueba");
+        publicacion.setContenido("Contenido de prueba");
+        publicacionRepository.save(publicacion);
+
+        publicacion.setTitulo("Titulo de prueba modificado");
+        publicacion.setContenido("Contenido de prueba modificado");
+        publicacionRepository.save(publicacion);
+
+        Publicacion publicacion2 = publicacionRepository.findById(publicacion.getId()).get();
+
+        assertNotNull(publicacion2);
+
+        assertEquals(publicacion.getId(), publicacion2.getId());
+
+        assertEquals("Titulo de prueba modificado", publicacion2.getTitulo());
+
+        assertEquals("Contenido de prueba modificado", publicacion2.getContenido());
+
+    }   
 }
